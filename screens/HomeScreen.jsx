@@ -16,7 +16,12 @@ import {
   MagnifyingGlassIcon,
 } from "react-native-heroicons/outline";
 import { SearchBar } from "react-native-screens";
+
+{
+  /*----------Components---------*/
+}
 import Categories from "../components/Categories";
+import FeaturedRow from "../components/FeaturedRow";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -64,18 +69,30 @@ const HomeScreen = () => {
 
       {/*----------Body----------------*/}
 
-
-      <ScrollView className="bg-gray-100"
-      contentContainerStyle={{
-        paddingBottom: 100,
-        
-      }}
+      <ScrollView
+        className="bg-gray-100"
+        contentContainerStyle={{
+          paddingBottom: 100,
+        }}
       >
-
-          {/*--------Categories----------*/}
-          <Categories/>
-          {/*-----------Featured row---------------*/}
-
+        {/*--------Categories----------*/}
+        <Categories />
+        {/*-----------Featured row---------------*/}
+        <FeaturedRow
+          title="Featured"
+          description="Paid placements from our partners"
+          id="123"
+        />
+        <FeaturedRow
+          title="Tasty Discounts"
+          description="Everyone has been enjoying this tasty discounts"
+          id="1234"
+        />
+        <FeaturedRow
+          title="Offers for you!"
+          description="Support your local restaurant tonight!"
+          id="123556"
+        />
       </ScrollView>
     </SafeAreaView>
   );
