@@ -1,8 +1,6 @@
 /* polyfills */
 /** URL polyfill */
-import 'react-native-url-polyfill/auto';
-
-
+import "react-native-url-polyfill/auto";
 
 import {
   StyleSheet,
@@ -13,14 +11,20 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
+
+
+
 import { useNavigation } from "@react-navigation/core";
+
 import React, { useEffect, useLayoutEffect } from "react";
+
 import {
   ChevronDownIcon,
   UserIcon,
   AdjustmentsVerticalIcon,
   MagnifyingGlassIcon,
 } from "react-native-heroicons/outline";
+
 import { SearchBar } from "react-native-screens";
 
 import { useState } from "react";
@@ -43,7 +47,7 @@ const HomeScreen = () => {
     });
   }, []);
 
-  useEffect(() => { 
+  useEffect(() => {
     sanityClient
       .fetch(
         `
@@ -117,8 +121,6 @@ const HomeScreen = () => {
             description={category.short_description}
           />
         ))}
-
-       
       </ScrollView>
     </SafeAreaView>
   );

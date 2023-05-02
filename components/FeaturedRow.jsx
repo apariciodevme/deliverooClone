@@ -1,11 +1,38 @@
+import "react-native-url-polyfill/auto";
 
 
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ArrowRightIcon } from 'react-native-heroicons/outline'
 import RestaurantCard from './RestaurantCard'
 
+
+import { useState } from "react";
+import sanityClient from "../sanity";
+
+
 const FeaturedRow = ({id, title, description}) => {
+  const [featuredCategories, setFeaturedCategories] = useState([]);
+
+
+  useEffect(() => {
+    sanityClient
+      .fetch(
+        `
+  *[_type == 'restaurant']{
+    ...,
+    restaurants[]->{
+    }
+    
+  }
+  `
+      )
+      .then((data) => {
+        setFeaturedCategories(data);
+      });
+  }, []);
+  
+
   return (
     <View>
       <View className="mt-4 flex-row items-center justify-between px-4">
@@ -23,44 +50,29 @@ const FeaturedRow = ({id, title, description}) => {
       }}
       className="pt-4"
       >
-        {/*Restaurant Cards*/}
-        <RestaurantCard
-         id={123}
-         imgUrl='https://links.papareact.com/gn7'
-         title="Nandos"
-         rating={4.5}
-         genre="Chicken"
-         address="123 main street"
-         short_description="This is teh description mate, nandos innit"
-         dishes={[]}
-         long={20}
-         lat={34}
-         />
-        <RestaurantCard
-         id={123}
-         imgUrl='https://links.papareact.com/gn7'
-         title="Nandos"
-         rating={4.5}
-         genre="Chicken"
-         address="123 main street"
-         short_description="This is teh description mate, nandos innit"
-         dishes={[]}
-         long={20}
-         lat={34}
-         />
-        <RestaurantCard
-         id={123}
-         imgUrl='https://links.papareact.com/gn7'
-         title="Nandos"
-         rating={4.5}
-         genre="Chicken"
-         address="123 main street"
-         short_description="This is teh description mate, nandos innit"
-         dishes={[]}
-         long={20}
-         lat={34}
-         />
 
+
+        {/*Restaurant Cards*/}
+
+
+
+        {featuredCategories?.map(category => (
+           <RestaurantCard
+           id={category._id}
+           key={category._id}
+           imgUrl={category.image}
+           title={category.name}
+           rating={4.5}
+           genre="Chicken"
+           address={category.address}
+           short_description="This is teh description mate, nandos innit"
+           dishes={[]}
+           long={20}
+           lat={34}
+           />
+        ))}
+  
+      
 
 
       </ScrollView>
