@@ -12,7 +12,7 @@ import sanityClient from "../sanity";
 
 
 const FeaturedRow = ({id, title, description}) => {
-  const [featuredCategories, setFeaturedCategories] = useState([]);
+  const [restaurants, setRestaurants] = useState([]);
 
 
   useEffect(() => {
@@ -22,13 +22,14 @@ const FeaturedRow = ({id, title, description}) => {
   *[_type == 'restaurant']{
     ...,
     restaurants[]->{
+   
     }
     
   }
   `
       )
       .then((data) => {
-        setFeaturedCategories(data);
+        setRestaurants(data);
       });
   }, []);
   
@@ -56,19 +57,19 @@ const FeaturedRow = ({id, title, description}) => {
 
 
 
-        {featuredCategories?.map(category => (
+        {restaurants?.map(restaurant => (
            <RestaurantCard
-           id={category._id}
-           key={category._id}
-           imgUrl={category.image}
-           title={category.name}
-           rating={4.5}
-           genre="Chicken"
-           address={category.address}
-           short_description="This is teh description mate, nandos innit"
-           dishes={[]}
-           long={20}
-           lat={34}
+           id={restaurant._id}
+           key={restaurant._id}
+           imgUrl={restaurant.image}
+           title={restaurant.name}
+           rating={restaurant.rating}
+           genre={restaurant.genre}
+           address={restaurant.address}
+           short_description={restaurant.short_description}
+           dishes={restaurant.dishes}
+           long={restaurant.long}
+           lat={restaurant.lat}
            />
         ))}
   
