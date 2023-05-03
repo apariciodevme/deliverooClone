@@ -21,9 +21,7 @@ const FeaturedRow = ({id, title, description}) => {
         `
   *[_type == 'restaurant']{
     ...,
-    restaurants[]->{
-   
-    }
+    restaurants
     
   }
   `
@@ -32,8 +30,8 @@ const FeaturedRow = ({id, title, description}) => {
         setRestaurants(data);
       });
   }, []);
+  
   console.log(restaurants)
-
 
   return (
     <View>
